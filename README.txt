@@ -28,3 +28,8 @@ Credits:
 	Other:
 		jQuery (jquery.com)
 		Responsive Tools (github.com/ajlkn/responsive-tools)
+
+
+git add . //全部檔案都加到版控
+git commit -m "version" //版控名稱
+git push //推到遠端
