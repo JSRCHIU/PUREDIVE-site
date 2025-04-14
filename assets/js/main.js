@@ -399,6 +399,7 @@
 					});
 
 })(jQuery);
+
 // 輪播圖功能
 function initCarousel() {
     const containers = document.querySelectorAll('.carousel-container');
@@ -417,20 +418,18 @@ function initCarousel() {
         slides[currentIndex].classList.add('active');
         
         // 更新輪播圖位置
-const moveToSlide = (index) => {
-    if (index < 0) index = slides.length - 1;
-    if (index >= slides.length) index = 0;
-    
-    // 計算位移量，確保當前圖片置中
-    const moveX = index * -100;
-    track.style.transform = `translateX(calc(-50% + ${moveX}%))`;
-    
-    // 更新活動狀態
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[index].classList.add('active');
-    
-    currentIndex = index;
-};
+        const moveToSlide = (index) => {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            
+            // 更新活動狀態
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            
+            // 計算位移量
+            track.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+        };
         
         // 事件監聽
         nextButton.addEventListener('click', () => {
@@ -459,6 +458,23 @@ const moveToSlide = (index) => {
                 // 向右滑
                 moveToSlide(currentIndex - 1);
             }
+        });
+
+        // 自動輪播
+        const autoSlide = () => {
+            moveToSlide(currentIndex + 1);
+        };
+
+        let autoSlideInterval = setInterval(autoSlide, 5000); // 每5秒自動切換
+
+        // 當滑鼠移入時停止自動輪播
+        container.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        // 當滑鼠移出時恢復自動輪播
+        container.addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(autoSlide, 5000);
         });
     });
 }

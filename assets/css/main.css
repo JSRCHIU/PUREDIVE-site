@@ -31,6 +31,13 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	min-height: 100%;
+	height: 100vh;
+	min-height: -webkit-fill-available;
+	width: 100%;
+	height: 100vh;
+	min-height: -webkit-fill-available;
+	background: #1b1f22;  /* 恢復原始的背景色 */
 }
 
 ol, ul {
@@ -88,14 +95,78 @@ input, select, textarea {
 
 	html {
 		box-sizing: border-box;
-	}
-
-	*, *:before, *:after {
-		box-sizing: inherit;
+		height: 100%;
+		height: -webkit-fill-available;
 	}
 
 	body {
-		background: #1b1f22;
+		height: 100%;
+		height: -webkit-fill-available;
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
+		overflow-x: hidden;
+	}
+
+	#bg {
+		-moz-transform: scale(1.0);
+		-webkit-transform: scale(1.0);
+		-ms-transform: scale(1.0);
+		transform: scale(1.0);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		height: -webkit-fill-available;
+		z-index: 1;
+	}
+
+		#bg:before {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 2;
+		}
+
+		#bg video {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			-webkit-transform: translateZ(0);
+			transform: translateZ(0);
+		}
+
+		@supports (-webkit-touch-callout: none) {
+			#bg video {
+				height: -webkit-fill-available;
+			}
+		}
+
+		@media screen and (max-width: 736px) {
+			#bg video {
+				object-position: 70% center;
+			}
+		}
+
+		@media screen and (max-width: 480px) {
+			#bg video {
+				object-position: 65% center;
+			}
+		}
+
+	*, *:before, *:after {
+		box-sizing: inherit;
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -112,7 +183,7 @@ input, select, textarea {
 /* Type */
 
 	html {
-		font-size: 16pt;
+		font-size: 12pt;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -126,7 +197,7 @@ input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			html {
-				font-size: 11pt;
+				font-size: 12pt;
 			}
 
 		}
@@ -134,7 +205,7 @@ input, select, textarea {
 		@media screen and (max-width: 360px) {
 
 			html {
-				font-size: 10pt;
+				font-size: 12pt;
 			}
 
 		}
@@ -148,18 +219,10 @@ input, select, textarea {
 	}
 
 	a {
-		-moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		-webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		-ms-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-		transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 		border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
 		text-decoration: none;
 		color: inherit;
 	}
-
-		a:hover {
-			border-bottom-color: transparent;
-		}
 
 	strong, b {
 		color: #ffffff;
@@ -395,10 +458,6 @@ input, select, textarea {
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		-moz-transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-		-webkit-transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-		-ms-transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-		transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 		background-color: transparent;
 		border-radius: 4px;
 		border: solid 1px #ffffff;
@@ -417,17 +476,6 @@ input, select, textarea {
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
-		}
-
-		input[type="text"]:focus,
-		input[type="password"]:focus,
-		input[type="email"]:focus,
-		input[type="tel"]:focus,
-		select:focus,
-		textarea:focus {
-			background: rgba(255, 255, 255, 0.075);
-			border-color: #ffffff;
-			box-shadow: 0 0 0 1px #ffffff;
 		}
 
 	select {
@@ -512,10 +560,6 @@ input, select, textarea {
 
 			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
-				-moz-transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-				-webkit-transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-				-ms-transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-				transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 				border-radius: 4px;
 				border: solid 1px #ffffff;
 				content: '';
@@ -524,7 +568,6 @@ input, select, textarea {
 				left: 0;
 				line-height: 1.65rem;
 				position: absolute;
-				text-align: center;
 				top: -0.15rem;
 				width: 1.65rem;
 			}
@@ -536,21 +579,6 @@ input, select, textarea {
 			color: #1b1f22;
 			content: '\f00c';
 		}
-
-		input[type="checkbox"]:focus + label:before,
-		input[type="radio"]:focus + label:before {
-			background: rgba(255, 255, 255, 0.075);
-			border-color: #ffffff;
-			box-shadow: 0 0 0 1px #ffffff;
-		}
-
-	input[type="checkbox"] + label:before {
-		border-radius: 4px;
-	}
-
-	input[type="radio"] + label:before {
-		border-radius: 100%;
-	}
 
 	::-webkit-input-placeholder {
 		color: rgba(255, 255, 255, 0.5) !important;
@@ -770,6 +798,68 @@ input, select, textarea {
 		dl dd {
 			margin-left: 2rem;
 		}
+		/* Course List */
+.course-list {
+    display: grid;
+    gap: 2rem;
+}
+
+.course-item {
+    padding: 1.5rem;        /* 維持原本的大小 */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;    /* 垂直置中 */
+    justify-content: center;/* 水平置中 */
+    min-height: 150px;      /* 維持原本的高度 */
+}
+
+.course-content {
+    width: 100%;
+    padding: 0;            /* 移除內邊距 */
+    margin: auto 0;        /* 上下 margin 設為 auto 實現垂直置中 */
+}
+
+.course-title {
+    margin: 0 0 1rem 0;    
+    color:  #B9E1F3;        /* 淡藍色 */
+    font-size: 20px;
+}
+
+.course-price {
+    margin: 0.5rem 0;      /* 保持價格項目間距 */
+}
+
+.course-price:last-child {
+    margin-bottom: 0;      /* 最後一個價格項目移除底部間距 */
+}
+
+.course-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.text-section {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.course-text {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+.course-title {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.course-price {
+    margin: 0.5rem 0;
+    font-size: 18px;
+}
 
 /* Actions */
 
@@ -903,35 +993,66 @@ input, select, textarea {
 
 		ul.icons li {
 			display: inline-block;
-			padding: 0 0.75em 0 0;
+			padding: 0;
 		}
+
 		.contact-social {
-			margin-bottom: 2rem !important;
+			margin-bottom: 0.5rem !important;
 			text-align: center;
-		}
-		
-		.contact-social li a {
-			width: 3.5rem !important;
-			height: 3.5rem !important;
-			line-height: 3.5rem !important;
-		}
-		
-		.contact-social li a:before {
-			font-size: 1.8rem;
 		}
 		
 		.contact-social li {
-			padding: 0 1rem !important;
+			padding: 0 !important;
+			margin: 0 !important;
 		}
-		.contact-text {
-			text-align: center;
-			margin: 0.1rem 0 2rem 0;
-			font-size: 0.9rem;
-			line-height: 1.8;
+		
+		.contact-social li a {
+			width: 4rem !important;
+			height: 4rem !important;
+			line-height: 4rem !important;
+			border: none !important;
+			box-shadow: none !important;
+			margin: 0 !important;
 		}
-			ul.icons li:last-child {
-				padding-right: 0;
-			}
+		
+		.contact-social li a:before {
+			font-size: 2.7rem;
+		}
+
+		.contact-social li a.fa-instagram:before {
+			background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.contact-social li a.fa-line:before {
+			color: #00B900;
+		}
+
+		.contact-social li a.fa-facebook-f:before {
+			color: #1877F2;
+		}
+
+		.contact-social li a.fa-envelope:before {
+			color: #ffffff;
+		}
+
+		.contact-social li a:hover {
+			opacity: 1 !important;
+			transform: none !important;
+			transition: none !important;
+		}
+
+		.contact-social li a:hover:before {
+			opacity: 1 !important;
+			transform: none !important;
+			transition: none !important;
+		}
+
+		ul.icons li:last-child {
+			padding-right: 0;
+		}
 
 			ul.icons li a {
 				border-radius: 100%;
@@ -943,12 +1064,28 @@ input, select, textarea {
 				width: 2.25rem;
 			}
 
-				ul.icons li a:hover {
-					background-color: rgba(255, 255, 255, 0.075);
+				ul.icons li a.fa-instagram:before {
+					background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+					-webkit-background-clip: text;
+					background-clip: text;
+					-webkit-text-fill-color: transparent;
 				}
 
-				ul.icons li a:active {
-					background-color: rgba(255, 255, 255, 0.175);
+				ul.icons li a.fa-line:before {
+					color: #00B900;
+				}
+
+				ul.icons li a.fa-facebook-f:before {
+					color: #1877F2;
+				}
+
+				ul.icons li a.fa-envelope:before {
+					color: #ffffff;
+				}
+
+				ul.icons li a {
+					border: none !important;
+					box-shadow: none !important;
 				}
 
 /* Table */
@@ -1030,10 +1167,6 @@ input, select, textarea {
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		background-color: transparent;
 		border-radius: 4px;
 		border: 0;
@@ -1053,48 +1186,6 @@ input, select, textarea {
 		text-transform: uppercase;
 		white-space: nowrap;
 	}
-
-		input[type="submit"]:hover,
-		input[type="reset"]:hover,
-		input[type="button"]:hover,
-		button:hover,
-		.button:hover {
-			background-color: rgba(255, 255, 255, 0.075);
-		}
-
-		input[type="submit"]:active,
-		input[type="reset"]:active,
-		input[type="button"]:active,
-		button:active,
-		.button:active {
-			background-color: rgba(255, 255, 255, 0.175);
-		}
-
-		input[type="submit"].icon:before,
-		input[type="reset"].icon:before,
-		input[type="button"].icon:before,
-		button.icon:before,
-		.button.icon:before {
-			margin-right: 0.5em;
-		}
-
-		input[type="submit"].fit,
-		input[type="reset"].fit,
-		input[type="button"].fit,
-		button.fit,
-		.button.fit {
-			width: 100%;
-		}
-
-		input[type="submit"].small,
-		input[type="reset"].small,
-		input[type="button"].small,
-		button.small,
-		.button.small {
-			font-size: 0.6rem;
-			height: 2.0625rem;
-			line-height: 2.0625rem;
-		}
 
 		input[type="submit"].primary,
 		input[type="reset"].primary,
@@ -1126,15 +1217,23 @@ input, select, textarea {
 	button {
 		line-height: calc(2.75rem - 2px);
 	}
+	/* Line Button */
+.line-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #00B900;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
 
 /* BG */
 
 	#bg {
-		-moz-transform: scale(1.0);
-		-webkit-transform: scale(1.0);
-		-ms-transform: scale(1.0);
-		transform: scale(1.0);
-		-webkit-backface-visibility: hidden;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -1143,7 +1242,7 @@ input, select, textarea {
 		z-index: 1;
 	}
 
-		#bg:before, #bg:after {
+		#bg:before {
 			content: '';
 			display: block;
 			position: absolute;
@@ -1151,68 +1250,22 @@ input, select, textarea {
 			left: 0;
 			width: 100%;
 			height: 100%;
-		}
-
-		#bg:before {
-			-moz-transition: background-color 2.5s ease-in-out;
-			-webkit-transition: background-color 2.5s ease-in-out;
-			-ms-transition: background-color 2.5s ease-in-out;
-			transition: background-color 2.5s ease-in-out;
-			-moz-transition-delay: 0.75s;
-			-webkit-transition-delay: 0.75s;
-			-ms-transition-delay: 0.75s;
-			transition-delay: 0.75s;
-			background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("../../images/overlay.png");
-			background-size: auto,
- 256px 256px;
-			background-position: center,
- center;
-			background-repeat: no-repeat,
- repeat;
+			background-color: rgba(19, 21, 25, 0.5);
 			z-index: 2;
 		}
 
-		#bg:after {
-			-moz-transform: scale(1.125);
-			-webkit-transform: scale(1.125);
-			-ms-transform: scale(1.125);
-			transform: scale(1.125);
-			-moz-transition: -moz-transform 0.325s ease-in-out, -moz-filter 0.325s ease-in-out;
-			-webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out;
-			-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
-			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
-			background:none;
-			background-position: center;
-			background-size: cover;
-			background-repeat: no-repeat;
-			z-index: 1;
-		}
-
-		body.is-article-visible #bg:after {
-			-moz-transform: scale(1.0825);
-			-webkit-transform: scale(1.0825);
-			-ms-transform: scale(1.0825);
-			transform: scale(1.0825);
-			-moz-filter: blur(0.2rem);
-			-webkit-filter: blur(0.2rem);
-			-ms-filter: blur(0.2rem);
-			filter: blur(0.2rem);
-		}
-
-		body.is-preload #bg:before {
-			background-color: #000000;
-		}
 		#bg video {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			width: 100%;
+			min-width: 100%;
+			min-height: 100%;
+			width: auto;
 			height: auto;
-			object-fit: cover;
 			z-index: 0;
 		}
-		
+
 /* Wrapper */
 
 	#wrapper {
@@ -1234,6 +1287,7 @@ input, select, textarea {
 		justify-content: space-between;
 		position: relative;
 		min-height: 100vh;
+		min-height: -webkit-fill-available;
 		width: 100%;
 		padding: 4rem 2rem;
 		z-index: 3;
@@ -1244,28 +1298,28 @@ input, select, textarea {
 			display: block;
 		}
 
-		@media screen and (max-width: 1680px) {
+		@supports(padding: max(0px)) {
+			#wrapper {
+				padding-left: max(2rem, env(safe-area-inset-left));
+				padding-right: max(2rem, env(safe-area-inset-right));
+				padding-top: max(4rem, env(safe-area-inset-top));
+				padding-bottom: max(4rem, env(safe-area-inset-bottom));
+			}
+		}
 
+		@media screen and (max-width: 736px) {
 			#wrapper {
 				padding: 3rem 2rem;
 			}
 
-		}
-
-		@media screen and (max-width: 736px) {
-
-			#wrapper {
-				padding: 2rem 1rem;
+			@supports(padding: max(0px)) {
+				#wrapper {
+					padding-left: max(2rem, env(safe-area-inset-left));
+					padding-right: max(2rem, env(safe-area-inset-right));
+					padding-top: max(3rem, env(safe-area-inset-top));
+					padding-bottom: max(3rem, env(safe-area-inset-bottom));
+				}
 			}
-
-		}
-
-		@media screen and (max-width: 480px) {
-
-			#wrapper {
-				padding: 1rem;
-			}
-
 		}
 
 /* Header */
@@ -1294,6 +1348,7 @@ input, select, textarea {
 		max-width: 100%;
 		text-align: center;
 	}
+	
 
 		#header > * {
 			-moz-transition: opacity 0.325s ease-in-out;
@@ -1395,65 +1450,44 @@ input, select, textarea {
 			
 			#header nav ul li {
 				position: relative;
-				flex: 1 1 250px;
-				max-width: 300px;
+				flex: 1 1 300px;      /* 增加基準寬度 */
+				max-width: 400px;     /* 增加最大寬度 */
 				margin: 0.5rem;
 			}
 			
 			#header nav ul li a {
 				display: block;
 				width: 100%;
-				padding: 1rem 1.5rem;
+				padding: 0.7rem 2rem;  /* 減少上下內邊距，增加左右內邊距 */
 				text-align: center;
-				font-size: 1.1rem;
+				font-size: 1.3rem;      /* 1rem * 1.3 */
 				letter-spacing: 0.15rem;
 				text-transform: uppercase;
 				text-decoration: none;
-				background: rgba(255, 255, 255, 0.05);
+				background: rgba(255, 255, 255, 0.075);
 				border: 1px solid rgba(255, 255, 255, 0.2);
 				border-radius: 4px;
-				transition: all 0.3s ease;
+				transition: background-color 0.2s ease;
 			}
-			
-			/* 手機尺寸響應 */
-			@media screen and (max-width: 736px) {
-				#header nav ul li a {
-					padding: 0.75rem 1rem;
-					font-size: 1rem;
-				}
+
+			#header nav ul li a:active {
+				background-color: rgba(255, 255, 255, 0.15);
 			}
-			
-			/* 小尺寸手機響應 */
-			@media screen and (max-width: 480px) {
-				#header nav ul li a {
-					padding: 0.6rem 0.8rem;
-					font-size: 0.9rem;
-				}
+
+			#header nav.use-middle:after {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0;
+				left: calc(50% - 1px);
+				width: 1px;
+				height: 100%;
+				background: #ffffff;
 			}
-			
 
-					#header nav ul li a:hover {
-						background-color: rgba(255, 255, 255, 0.075);
-					}
-
-					#header nav ul li a:active {
-						background-color: rgba(255, 255, 255, 0.175);
-					}
-
-		#header nav.use-middle:after {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			left: calc(50% - 1px);
-			width: 1px;
-			height: 100%;
-			background: #ffffff;
-		}
-
-		#header nav.use-middle ul li.is-middle {
-			border-left: 0;
-		}
+			#header nav.use-middle ul li.is-middle {
+				border-left: 0;
+			}
 
 		body.is-article-visible #header {
 			-moz-transform: scale(0.95);
@@ -1494,6 +1528,27 @@ input, select, textarea {
 		}
 
 		@media screen and (max-width: 736px) {
+			#header .content {
+				margin-top: -0.5rem;  /* 調整頂部間距 */
+			}
+
+			#header .content .inner {
+				padding: 2rem 1rem;  /* 調整內容區域的內邊距 */
+			}
+
+			#header .logo {
+				margin-bottom: 1rem; /* 調整 logo 底部間距 */
+			}
+
+			#header .content .inner h1 {
+				font-size: 1.8rem;  /* 減小標題大小 */
+				margin-bottom: 0.8rem;
+			}
+
+			#header .content .inner p {
+				font-size: 0.9rem;  /* 減小描述文字大小 */
+				line-height: 1.4;
+			}
 
 			#header > * {
 				margin-top: 2rem;
@@ -1539,7 +1594,42 @@ input, select, textarea {
 					display: none;
 				}
 
-		
+		/* 導航菜單在手機版的位置和大小 */
+		@media screen and (max-width: 736px) {
+			#header nav {
+				margin: 1.5rem 0;  /* 調整上下邊距 */
+			}
+
+			#header nav ul {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;     /* 項目之間的間距 */
+				padding: 0;      /* 移除預設內邊距 */
+			}
+
+			#header nav ul li {
+				width: 100%;     /* 確保寬度填滿 */
+			}
+
+			#header nav ul li a {
+				padding: 0.8rem;  /* 稍微減小內邊距 */
+				min-height: 44px; /* 保持最小觸控區域 */
+				font-size: 1.3rem; /* 調整字體大小 */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: rgba(255, 255, 255, 0.05); /* 添加輕微背景 */
+				border-radius: 4px; /* 圓角邊框 */
+			}
+
+			/* 特別處理最小的 iPhone SE (320px) */
+			@media screen and (max-width: 320px) {
+				#header nav ul li a {
+					padding: 0.7rem;
+					font-size: 1.2rem;
+				}
+			}
+		}
 
 /* Main */
 
@@ -1686,6 +1776,33 @@ input, select, textarea {
 			}
 
 		}
+		/* Feedback Section */
+.feedback-section {
+    margin-top: 3rem;
+}
+
+.feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.feedback-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 125%; /* 4:5 比例 */
+    overflow: hidden;
+}
+
+.feedback-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 /* Footer */
 
@@ -1744,14 +1861,15 @@ input, select, textarea {
 .carousel-container {
     position: relative;
     width: 100%;
-    margin: 2rem 0;
+    margin: 0.1rem 0 2rem 0;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
 .carousel-track-container {
     width: 100%;
-    padding-top: 56.25%;
+    padding-top: 75%; /* 改為 4:3 比例 */
     position: relative;
     overflow: hidden;
 }
@@ -1759,12 +1877,11 @@ input, select, textarea {
 .carousel-track {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 0;
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 100%;
     height: 100%;
-    transform: translateX(-50%); /* 初始置中 */
 }
 
 .carousel-slide {
@@ -1772,12 +1889,8 @@ input, select, textarea {
     width: 100%;
     height: 100%;
     position: relative;
-    opacity: 0.5; /* 非活動狀態的透明度 */
+    opacity: 1;
     transition: opacity 0.3s ease;
-}
-
-.carousel-slide.active {
-    opacity: 1; /* 活動狀態的透明度 */
 }
 
 .carousel-slide img {
@@ -1803,17 +1916,19 @@ input, select, textarea {
     cursor: pointer;
     z-index: 10;
     font-size: 1.5rem;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0.7;
 }
 
 .carousel-button:hover {
     background: rgba(0, 0, 0, 0.8);
+    opacity: 1;
 }
 
 .carousel-button.prev {
@@ -1831,4 +1946,520 @@ input, select, textarea {
         height: 2rem;
         font-size: 1rem;
     }
+}
+/* Custom Styles for Courses */
+.course-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.text-section {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.course-list {
+    display: grid;
+    gap: 2rem;
+}
+
+.course-item {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.course-content {
+    margin-bottom: 1rem;
+}
+
+.course-title {
+    margin: 0 0 1rem 0;    
+    color:  #B9E1F3;        /* 淡藍色 */
+    font-size: 21px;
+}
+
+.course-price {
+    margin: 0.5rem 0;      /* 調整價格間距 */
+}
+
+.line-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #00B900;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.feedback-section {
+    margin-top: 3rem;
+}
+
+.feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.feedback-image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 125%;
+    overflow: hidden;
+}
+
+.feedback-image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 736px) {
+    .feedback-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Course and Fun Dive Item Styles */
+.course-item, .fundive-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    min-height: 120px;
+}
+
+.course-content, .fundive-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Carousel Spacing */
+.courses-carousel, .fundive-carousel {
+    margin-bottom: 3.5rem;
+}
+
+/* Bottom Note Text */
+.bottom-note {
+    font-size: 16px;
+    color: #ffffff;
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+/* Contact Social Icons */
+.contact-social {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.2rem;
+    padding-left: 0;
+}
+
+.contact-social li {
+    padding: 0;
+}
+
+.contact-social a {
+    font-size: 1.5em;
+    border-bottom: none;
+}
+
+@media screen and (max-width: 480px) {
+    .contact-social {
+        gap: 0.25rem;
+    }
+    
+    .contact-social a {
+        font-size: 1.2em;
+    }
+}
+
+.contact-social li a.fa-instagram:before {
+			background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.contact-social li a.fa-line:before {
+			color: #00B900;
+		}
+
+		.contact-social li a.fa-facebook-f:before {
+			color: #1877F2;
+		}
+
+		.contact-social li a.fa-envelope:before {
+			color: #ffffff;
+		}
+
+		.contact-social li a {
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		.contact-social li a:hover {
+			opacity: 1 !important;
+			transform: none !important;
+			transition: none !important;
+		}
+
+		.contact-social li a:hover:before {
+			opacity: 1 !important;
+			transform: none !important;
+			transition: none !important;
+		}
+
+		.contact-text {
+			text-align: center;
+			margin: 0.1rem 0 1rem 0;
+			font-size: 0.9rem;
+			line-height: 1.8;
+		}
+		
+		.contact-details {
+			text-align: center;
+			margin-bottom: 1.5rem;
+			line-height: 1.8;
+			letter-spacing: 0.1rem;
+			font-size: 1.1rem;
+		}
+		
+		.contact-details strong {
+			font-size: 1.2rem;
+			margin-right: 0.5rem;
+		}
+		
+		.contact-details span {
+			font-size: 1.2rem;
+		}
+		
+		.contact-info {
+			font-size: 1rem;
+			margin-bottom: 3rem;
+		}
+
+		/* Language Switcher */
+		.language-switch {
+			position: fixed;
+			top: 2rem;
+			right: 2rem;
+			z-index: 1000;
+			background: rgba(255, 255, 255, 0.075);
+			padding: 0.4rem 0.8rem;
+			border-radius: 4px;
+			cursor: pointer;
+			font-weight: 300;
+			letter-spacing: 0.15rem;
+			font-size: 0.8rem;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			transition: opacity 0.3s ease, transform 0.3s ease;
+		}
+
+		.language-switch:hover {
+			opacity: 1;
+			background: rgba(255, 255, 255, 0.15);
+			transform: scale(1.05);
+		}
+
+		.language-switch:active {
+			transform: scale(0.95);
+		}
+
+		.language-switch.hidden {
+			opacity: 0;
+			transform: translateY(-100%);
+			pointer-events: none;
+		}
+
+		/* Hide English content by default */
+		[lang="en"] {
+			display: none;
+		}
+
+		/* Show English content when .en-mode is active */
+		.en-mode [lang="en"] {
+			display: block;
+		}
+
+		.en-mode [lang="zh"] {
+			display: none;
+		}
+
+		@media screen and (max-width: 736px) {
+			.language-switch {
+				top: 1rem;
+				right: 1rem;
+				padding: 0.6rem 1rem;
+				font-size: 0.9rem;
+			}
+
+			.language-switch:hover {
+				transform: none;
+			}
+		}
+
+		@media screen and (max-width: 360px) {
+			.language-switch {
+				top: 0.8rem;
+				right: 0.8rem;
+			}
+		}
+/* 支援 iPhone 全面屏 */
+@supports(padding: max(0px)) {
+	body {
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
+		padding-top: env(safe-area-inset-top);
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+
+	/* 確保語言切換按鈕在全面屏上的位置正確 */
+	.language-switch {
+		right: max(2rem, env(safe-area-inset-right) + 1rem);
+		top: max(2rem, env(safe-area-inset-top) + 1rem);
+	}
+
+	@media screen and (max-width: 736px) {
+		.language-switch {
+			right: max(1rem, env(safe-area-inset-right) + 0.5rem);
+			top: max(1rem, env(safe-area-inset-top) + 0.5rem);
+		}
+	}
+
+	@media screen and (max-width: 360px) {
+		.language-switch {
+			right: max(0.8rem, env(safe-area-inset-right) + 0.4rem);
+			top: max(0.8rem, env(safe-area-inset-top) + 0.4rem);
+		}
+	}
+}
+
+body { background-color: #1b1f22; }
+
+#bgVideo {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			min-width: 100%;
+			min-height: 100%;
+			width: auto;
+			height: auto;
+			transform: translate(-50%, -50%);
+			z-index: 0;
+			opacity: 0;
+			transition: opacity 0.75s ease-in-out;
+		}
+
+		body:not(.is-preload) #bgVideo {
+			opacity: 1;
+		}
+
+/* Course Cards Layout */
+.course-list {
+    margin-bottom: 1.5rem;
+}
+
+.course-item {
+    display: flex;
+    align-items: center;
+    min-height: 120px;
+}
+
+.course-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+/* Course Cards Visual Styles */
+.course-item {
+    background: rgba(255, 255, 255, 0.075);
+    padding: 2rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.course-content {
+    margin-bottom: 0;
+}
+
+.course-title {
+    margin: 0 0 1rem 0;
+    color: #B9E1F3;
+    font-size: 20px;
+}
+
+.course-price {
+    margin: 0.25rem 0;
+}
+
+.course-text {
+    font-size: 18px;
+}
+
+.course-title[lang="en"] {
+    color: #B9E1F3;
+    font-size: 20px;
+}
+
+.course-price.note {
+    font-size: 15px;
+    margin: 0.75rem 0;
+    color: #ffeb3b !important;
+}
+
+.fundive-title {
+    color: #B9E1F3;
+    font-size: 20px;
+}
+
+/* 特定英文課程標題 */
+.course-title[lang="en"]:is(
+    [text="3-day Open Water Course"],
+    [text="3-day Advanced Open Water Course"],
+    [text="2-day Rescue Diver Course"],
+    [text="Dive Master"],
+    [text="1-day Enriched Air Course"],
+    [text="Half-day Re-activate Course"],
+    [text="Shore Dive (Varies by site)"],
+    [text="Night Dive"],
+    [text="Boat Dive (varies by site)"],
+    [text="Discover Scuba Diving"]
+) {
+    font-size: 20px;
+}
+
+/* 其他英文標題保持原來的大小 */
+.course-title[lang="en"],
+h3.special-size[lang="en"] {
+    color: #B9E1F3;
+    font-size: 20px !important;
+}
+
+.course-price.note {
+    font-size: 15px;
+    margin: 0.75rem 0;
+    color: #ffeb3b !important;
+}
+
+/* iPhone SE到iPhone Pro Max的螢幕寬度範圍：320px-428px */
+@media screen and (max-width: 428px) {
+    .course-item {
+        padding: 1rem 0.875rem;
+    }
+}
+
+.course-content {
+    margin-bottom: 0;
+}
+
+.course-title[lang="zh"] {
+    margin-bottom: 0.3rem;
+}
+
+.course-title[lang="en"] {
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* iPhone SE到iPhone Pro Max的螢幕寬度範圍：320px-428px */
+@media screen and (max-width: 428px) {
+    .course-title[lang="zh"] {
+        margin-bottom: 0.2rem;
+    }
+    
+    .course-title[lang="en"] {
+        margin-bottom: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 736px) {
+			#header nav ul li {
+				margin: 0.25rem 0;
+				flex: none;
+				max-width: none;
+				width: 100%;
+			}
+
+			#header nav ul li a {
+				padding: 1rem;
+				min-height: 44px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.3rem;
+			}
+		}
+
+/* 基本樣式（大螢幕） */
+#header nav ul li a {
+    font-size: 1.3rem;
+    letter-spacing: 0.15rem;
+}
+
+/* 平板和中等尺寸手機 (428px-736px) */
+@media screen and (max-width: 736px) {
+    #header nav ul li a {
+        font-size: 1.235rem;
+    }
+}
+
+/* 小尺寸手機 (375px-427px) */
+@media screen and (max-width: 427px) {
+    #header nav ul li a {
+        font-size: 1.17rem;
+    }
+}
+
+/* 最小尺寸手機 (320px-374px) */
+@media screen and (max-width: 374px) {
+    #header nav ul li a {
+        font-size: 1.105rem;
+    }
+}
+
+/* Environment Styles */
+.environment-item {
+    background: rgba(255, 255, 255, 0.075);
+    padding: 2rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.environment-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #B9E1F3;
+}
+
+.environment-price {
+    font-size: 16px;
+    margin: 0.35rem 0;
+}
+
+.environment-text {
+    font-size: 18px;
+    margin-top: 2rem;
+    color: rgba(255, 255, 255, 0.8);
 }
