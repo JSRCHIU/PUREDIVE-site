@@ -1451,7 +1451,6 @@ input, select, textarea {
 			#header nav ul li {
 				position: relative;
 				flex: 1 1 300px;      /* 增加基準寬度 */
-				max-width: 400px;     /* 增加最大寬度 */
 				margin: 0.5rem;
 			}
 			
