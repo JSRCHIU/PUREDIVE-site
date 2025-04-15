@@ -6,23 +6,18 @@
 -->
 <html>
 	<head>
-		<title>PURE DIVE</title>
+		<title>PUREDIVE - 台灣東北角潛水</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		
-		<!-- 基礎依賴 -->
-		<script defer src="assets/js/jquery.min.js"></script>
-		<script defer src="assets/js/browser.min.js"></script>
-		<script defer src="assets/js/breakpoints.min.js"></script>
-		<script defer src="assets/js/util.js"></script>
-		
-		<!-- 應用邏輯 -->
-		<script defer src="assets/js/language.js"></script>
-		<script defer src="assets/js/main.js"></script>
-		
+		<!-- 首頁關鍵樣式 -->
 		<style>
+			body { background-color: #1b1f22; }
+			#header { visibility: visible !important; opacity: 1 !important; }
+			#main article { visibility: hidden; }
+			@media screen and (max-width: 736px) { #header > *:before { height: calc(1.35rem) !important; top: calc(-1.35rem - 2px) !important; } }
+			@media screen and (max-width: 480px) { #contact .contact-social { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 1.5rem !important; } }
+			@media screen and (max-width: 360px) { #contact .contact-social { max-width: 240px !important; margin: 0 auto !important; } }
 			#contact .contact-social a {
 				transition: all 0.3s ease !important;
 				display: inline-block !important;
@@ -296,7 +291,93 @@
 			.fundive-title {
 				color: #B9E1F3;
 			}
+			/* 隱藏其他頁面，等待延遲載入 */
+			#main article {
+				visibility: hidden;
+			}
+			/* 首頁內容永遠可見 */
+			#header {
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+			/* 防止初始黑屏 */
+			body {
+				opacity: 1 !important;
+			}
+			#contact .contact-social {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 1rem;
+			}
+			#contact .contact-social a {
+				transition: all 0.3s ease;
+				display: inline-block;
+			}
+			#contact .contact-social a:hover {
+				transform: scale(1.2);
+			}
+			#contact .contact-social .fa-line:hover {
+				color: #00b900;
+			}
+			#contact .contact-social .fa-instagram:hover {
+				color: #e4405f;
+			}
+			#contact .contact-social .fa-facebook-f:hover {
+				color: #1877f2;
+			}
+			#contact .contact-social .fa-envelope:hover {
+				color: #ea4335;
+			}
+			@media screen and (max-width: 736px) {
+				#contact .contact-social {
+					gap: 1.5rem;
+				}
+				#contact .contact-social a {
+					width: 3rem;
+					height: 3rem;
+					font-size: 1.2rem;
+				}
+			}
+			@media screen and (max-width: 480px) {
+				#contact .contact-social {
+					gap: 1rem;
+					margin: 1.5rem 0;
+				}
+				#contact .contact-social a {
+					width: 3.5rem;
+					height: 3.5rem;
+					font-size: 1.4rem;
+				}
+			}
 		</style>
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
+		<!-- 基礎依賴 -->
+		<script defer src="assets/js/jquery.min.js"></script>
+		<script defer src="assets/js/browser.min.js"></script>
+		<script defer src="assets/js/breakpoints.min.js"></script>
+		<script defer src="assets/js/util.js"></script>
+		
+		<!-- 應用邏輯 -->
+		<script defer src="assets/js/language.js"></script>
+		<script>
+			// 立即移除 is-preload
+			document.documentElement.classList.remove('is-preload');
+			
+			// 延遲載入其他頁面內容
+			document.addEventListener('DOMContentLoaded', function() {
+				// 延遲載入其他頁面
+				setTimeout(function() {
+					var articles = document.querySelectorAll('#main article');
+					articles.forEach(function(article) {
+						article.style.visibility = 'visible';
+					});
+				}, 500);
+			});
+		</script>
+		<script defer src="assets/js/main.js"></script>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -449,7 +530,6 @@
 									<p class="course-price" lang="zh">｜若需於課程內一併完成EFR，課程時間調整為3日</p>
 									<p class="course-price" lang="zh">｜PADI NT$ 15,000</p>
 									<p class="course-price" lang="zh">｜SDI NT$ 13,000</p>
-									<p class="course-price note" lang="zh">注意：救援潛水員須持有在最近24個月內所完成的EFR證照。如已具備效期兩年內等同於EFR的急救證照(內含CPR, AED,次要救護，eg.,紅十字會急救員 )則可不必申請。</p>
 									<p class="course-price" lang="en">｜Theory、EFR Review、rescue and self rescue exercises</p>
 									<p class="course-price" lang="en">｜Open Water Rescue Scenarios、Exam</p>
 									<p class="course-price" lang="en">｜3-day course if EFR certification is needed</p>
@@ -962,7 +1042,7 @@
 							<h2 class="major" lang="en">Contact</h2>
 							
 							<!-- 社群媒體圖標 -->
-							<ul class="icons contact-social" style="display: flex; justify-content: center; flex-wrap: nowrap; margin: 0.5rem 0 7.2rem 0;">
+							<ul class="icons contact-social" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 0.5rem 0 7.2rem 0;">
 								<li><a href="https://lin.ee/o5KeT5e" class="icon brands fa-line" target="_blank"><span class="label">Line</span></a></li>
 								<li><a href="https://www.instagram.com/pure_dive/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li> 
 								<li><a href="https://www.facebook.com/p/純潛水Pure-dive-100091624269732/" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
@@ -1259,7 +1339,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 		<!-- BG -->
 		<div id="bg">
-			<video autoplay loop muted playsinline preload="none" poster="images/網站預覽圖.jpg">
+			<video autoplay loop muted playsinline>
 				<source src="images/fundive/background_2mb.mp4" type="video/mp4">
 			</video>
 		</div>
