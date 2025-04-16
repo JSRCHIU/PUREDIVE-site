@@ -15,6 +15,15 @@
 			body { background-color: #1b1f22; }
 			#header { visibility: visible !important; opacity: 1 !important; }
 			#main article { visibility: hidden; }
+			.hidden {
+				opacity: 0 !important;
+				pointer-events: none !important;
+				transition: opacity 0.3s ease;
+			}
+			.language-switch {
+				opacity: 1;
+				transition: opacity 0.3s ease;
+			}
 			@media screen and (max-width: 736px) { #header > *:before { height: calc(1.35rem) !important; top: calc(-1.35rem - 2px) !important; } }
 			@media screen and (max-width: 480px) { #contact .contact-social { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 1.5rem !important; } }
 			@media screen and (max-width: 360px) { #contact .contact-social { max-width: 240px !important; margin: 0 auto !important; } }
@@ -378,6 +387,28 @@
 			});
 		</script>
 		<script defer src="assets/js/main.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const languageSwitch = document.querySelector('.language-switch');
+				if (!languageSwitch) return;
+				
+				function handleScroll() {
+					const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+					console.log('Scroll position:', scrollTop); // 用於調試
+					
+					if (scrollTop <= 50) {
+						languageSwitch.classList.remove('hidden');
+						console.log('Showing language switch'); // 用於調試
+					} else {
+						languageSwitch.classList.add('hidden');
+						console.log('Hiding language switch'); // 用於調試
+					}
+				}
+				
+				window.addEventListener('scroll', handleScroll, { passive: true });
+				handleScroll(); // 初始化
+			});
+		</script>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->

@@ -36,19 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // 只在文章頁面內才處理滾動邏輯
-        const isInArticle = document.querySelector('#main article.active') !== null;
-        
-        if (isInArticle) {
-            // 只在接近頂部時（前50px）顯示按鈕
-            if (scrollTop <= 50) {
-                languageSwitch.classList.remove('hidden');
-            } else {
-                languageSwitch.classList.add('hidden');
-            }
-        } else {
-            // 不在文章頁面時保持顯示
+        // 所有頁面都使用相同的滾動邏輯
+        if (scrollTop <= 50) {
             languageSwitch.classList.remove('hidden');
+        } else {
+            languageSwitch.classList.add('hidden');
         }
     }
 
