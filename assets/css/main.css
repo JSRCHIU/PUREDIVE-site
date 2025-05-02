@@ -1778,6 +1778,7 @@ input, select, textarea {
 		/* Feedback Section */
 .feedback-section {
     margin-top: 3rem;
+	margin-bottom: 3rem; /* 增加底部邊距 */
 }
 
 .feedback-grid {
@@ -1790,7 +1791,7 @@ input, select, textarea {
 .feedback-image-container {
     position: relative;
     width: 100%;
-    padding-top: 125%; /* 4:5 比例 */
+    padding-top: 177.78%; /* 9:16 比例 */
     overflow: hidden;
 }
 
@@ -2007,12 +2008,6 @@ input, select, textarea {
     margin-top: 1.5rem;
 }
 
-.feedback-image-container {
-    position: relative;
-    width: 100%;
-    padding-top: 125%;
-    overflow: hidden;
-}
 
 .feedback-image-container img {
     position: absolute;
